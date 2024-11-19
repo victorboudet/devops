@@ -1,0 +1,6 @@
+FROM whanos-c
+WORKDIR /app
+COPY Makefile .
+COPY . .
+RUN make && mv compiled-app /app/
+CMD ["/app/compiled-app"]
