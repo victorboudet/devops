@@ -1,3 +1,7 @@
-FROM debian:bullseye-slim
-WORKDIR /app
-RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
+FROM gcc:11.2
+
+SHELL ["/bin/bash", "-c"]
+ONBUILD COPY . /app
+ONBUILD WORKDIR /app
+ONBUILD RUN make && rm -rf Makefile app
+ONBUILD CMD ["./compiled-app"]
